@@ -6,5 +6,5 @@
 .date-input-containter input[type='date'] {
     border: 1px solid black;
     border-radius: 5px;
-    width: 3rem;
+    width: fit-content;
 }

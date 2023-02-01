@@ -1,0 +1,49 @@
+.form-body {
+    display: grid;
+    padding-top: 28px;
+    padding-bottom: 28px;
+    gap: 40px;
+    border-radius: 8px;
+  }
+  .question-body {
+    display: grid;
+    padding-left: 28px;
+    padding-right: 28px;
+    margin-top: 40px;
+  }
+  .question-body > p {
+    margin-top: 4px;
+  }
+  .question-body > div {
+    display: grid;
+    gap: 20px;
+    margin-top: 28px;
+  }
+  .question-body > div > label {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  .question-body > div > label > p,
+  .question-body > div > label {
+    font-size: 18px;
+  }
+  
+  input[type="radio"],
+  input[type="checkbox"] {
+    min-height: 30px;
+    min-width: 30px;
+  }
+  label > input[type="text"],
+  label > input[type="radio"],
+  label > input[type="number"],
+  label > input[type="date"],
+  label > input[type="time"],
+  label > input[type="phone"],
+  label > input[type="email"],
+  label > textarea {
+    border: 1px solid rgb(42, 41, 41);
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 18px;
+  }
