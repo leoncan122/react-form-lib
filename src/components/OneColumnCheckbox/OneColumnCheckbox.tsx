@@ -1,36 +1,40 @@
-import React, { useState, useEffect } from "react";
-import "./inputDate.css"
+import React from "react";
+import "./OneColumnCheckbox.css"
 import "../../../public/global.css"
 
-interface Props {
+interface CheckboxProps {
     children?: React.ReactNode;
     onChange?: React.FormEventHandler<HTMLInputElement>;
     surveyForm: any;
     setSurveyForm: any;
     name: string;
     options?: any[];
+    columns: number;
 };
 
-const OneColumnCheckbox = React.forwardRef(({ children, surveyForm, setSurveyForm, options, ...props }: Props) => {
-    const [data, setData] = useState([...surveyForm[props.name]])
+const OneColumnCheckbox: React.FC<CheckboxProps> = ({ children, surveyForm, setSurveyForm, options, columns = 1, ...props }) => {
+    let data = [...surveyForm[props.name]];
 
-    const handleEventData = (value: any) => {
+    const sortedOptions: any = options?.sort();
+    const columnLength = Math.ceil(sortedOptions.length / columns);
+
+    const handleEventData = (e: any) => {
+        const { value } = e.target;
         const isValueOnData = data?.includes(value)
 
-        const filteredData = data.filter(oldValues => oldValues != value)
+        const filteredData = data?.filter((oldValues: any) => oldValues != value)
 
         isValueOnData ?
-            setData(filteredData) :
-            setData((previous) => ([
-                ...previous, value
-            ]))
+            data = filteredData :
+            data = [
+                ...data, value
+            ];
 
+        setSurveyForm((prev: any) => ({ ...prev, [props.name]: data }))
+            
     }
 
-    useEffect(() => {
-        setSurveyForm((prev: any) => ({ ...prev, [props.name]: data }))
 
-    }, [data])
 
 
     return (
@@ -38,32 +42,33 @@ const OneColumnCheckbox = React.forwardRef(({ children, surveyForm, setSurveyFor
             <h2 className="">
                 {children}
             </h2>
-            {options?.map((option, index) => (
-                <div className="">
-                    <label className="" key={index}>
+            {Array.from({ length: columns }, (_, i) => (
+                <div key={i} style={{ flex: 1 }}>
+                    {sortedOptions.slice(i * columnLength, (i + 1) * columnLength).map((option: string) => (
+                    <label key={i}>
                         <input
                             type="checkbox"
                             className=""
-                            value={option.value}
+                            value={option}
                             {...props}
-                            defaultChecked={surveyForm[props.name]?.includes(option.value) ? true : false}
+                            onChange={handleEventData}
+                            defaultChecked={surveyForm[props.name]?.includes(option) ? true : false}
                         />
-                    </label>
-                    {option?.value}
-                    {option?.value === 'Other' && (
-                        <label className="" key={index}>
+                        {option}
+                        {option === 'Other' && (
+                        <label className="">
                             <input
                                 type="text"
                                 {...props}
-                                name={`${name}Other`}
-                                value={option.value}
+                                name={`${props.name}Other`}
+                                value={option}
                                 onChange={handleEventData}
-                                defaultValue={surveyForm[props.name] + 'Other'}
+                                defaultValue={surveyForm[`${props.name}Other`]}
                             />
                         </label>
                     )}
-
-
+                    </label>
+                    ))}
                 </div>
             )
 
@@ -71,7 +76,7 @@ const OneColumnCheckbox = React.forwardRef(({ children, surveyForm, setSurveyFor
 
         </div>
     );
-});
+};
 
 
 export default OneColumnCheckbox;
