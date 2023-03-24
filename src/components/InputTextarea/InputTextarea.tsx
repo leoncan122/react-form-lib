@@ -10,12 +10,15 @@ interface TextAreaProps {
   cols?: number;
 }
 
-const Textarea = styled.textarea`
+let Textarea = styled.textarea`
     padding: 1rem;
     border: 1px solid black;
     border-radius: 5px;
 `
 const InputTextarea: React.FC<TextAreaProps> = ({ title, name, rows = 10, cols = 50, ...props }) => {
+  const changeStyle = (propertieStyle: string) => {
+    Textarea += `${propertieStyle}` 
+  }
   return (
     <div className='question-body'>
       <h2>{title}</h2>

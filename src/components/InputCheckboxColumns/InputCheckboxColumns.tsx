@@ -12,7 +12,7 @@ interface CheckboxProps {
     columns: number;
 };
 
-const OneColumnCheckbox: React.FC<CheckboxProps> = ({ children, surveyForm, setSurveyForm, options, columns = 1, ...props }) => {
+const InputCheckboxColumns: React.FC<CheckboxProps> = ({ children, surveyForm, setSurveyForm, options, columns = 1, ...props }) => {
     let data = [...surveyForm[props.name]];
 
     const sortedOptions: any = options?.sort();
@@ -79,4 +79,4 @@ const OneColumnCheckbox: React.FC<CheckboxProps> = ({ children, surveyForm, setS
 };
 
 
-export default OneColumnCheckbox;
+export default InputCheckboxColumns;
