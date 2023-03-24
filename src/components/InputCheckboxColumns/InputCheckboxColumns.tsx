@@ -1,5 +1,5 @@
 import React from "react";
-import "./OneColumnCheckbox.css"
+import "./InputCheckboxColumns.css"
 import "../../../public/global.css"
 
 interface CheckboxProps {

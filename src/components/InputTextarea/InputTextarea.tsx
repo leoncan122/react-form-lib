@@ -8,6 +8,7 @@ interface TextAreaProps {
   title?: string;
   rows?: number;
   cols?: number;
+  style: string
 }
 
 let Textarea = styled.textarea`
@@ -15,10 +16,9 @@ let Textarea = styled.textarea`
     border: 1px solid black;
     border-radius: 5px;
 `
-const InputTextarea: React.FC<TextAreaProps> = ({ title, name, rows = 10, cols = 50, ...props }) => {
-  const changeStyle = (propertieStyle: string) => {
-    Textarea += `${propertieStyle}` 
-  }
+const InputTextarea: React.FC<TextAreaProps> = ({ title, name, rows = 10, cols = 50, style,...props }) => {
+ 
+  Textarea += `${style}` 
   return (
     <div className='question-body'>
       <h2>{title}</h2>
@@ -30,6 +30,7 @@ const InputTextarea: React.FC<TextAreaProps> = ({ title, name, rows = 10, cols =
           name={name}
         ></Textarea>
       </label>
+      <input type={'text'}/>
     </div>
   );
 };
