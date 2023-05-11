@@ -1,0 +1,1 @@
+export {default as useImageToClipboard} from './useImageToClipboard'

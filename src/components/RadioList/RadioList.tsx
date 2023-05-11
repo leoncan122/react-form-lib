@@ -22,8 +22,8 @@ const RadioList: React.FC<RadioProps> = ({ title, options, onChange, selectedVal
             <h2>{title}</h2>
             {Array.from({ length: columns }, (_, i) => (
                 <div key={i} >
-                    {sortedOptions.slice(i * columnLength, (i + 1) * columnLength).map((option) => (
-                        <label key={option} >
+                    {sortedOptions.slice(i * columnLength, (i + 1) * columnLength).map((option, index) => (
+                        <label key={i * index} >
                             <input
                                 type="radio"
                                 value={option}

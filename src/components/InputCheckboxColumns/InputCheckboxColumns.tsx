@@ -44,8 +44,8 @@ const InputCheckboxColumns: React.FC<CheckboxProps> = ({ children, surveyForm, s
             </h2>
             {Array.from({ length: columns }, (_, i) => (
                 <div key={i} style={{ flex: 1 }}>
-                    {sortedOptions.slice(i * columnLength, (i + 1) * columnLength).map((option: string) => (
-                    <label key={i}>
+                    {sortedOptions.slice(i * columnLength, (i + 1) * columnLength).map((option: string, index: number) => (
+                    <label key={i * index}>
                         <input
                             type="checkbox"
                             className=""
