@@ -19,8 +19,8 @@ const InputTextarea: React.FC<TextAreaProps> = ({ title, name, rows = 10, cols =
  
   return (
     <div className='question-body'>
-      <h2>{title}</h2>
-      <label>
+      <h2 className='question-title'>{title}</h2>
+      <label className='question-label'>
         <Textarea
           rows={rows}
           cols={cols}

@@ -2,26 +2,30 @@ import React from "react";
 import "./inputDate.css"
 
 interface Props  {
-    children?: React.ReactNode;
+    title?: React.ReactNode;
+    label?: string
     onChange?: React.FormEventHandler<HTMLInputElement>;
-    surveyForm?: any;
+    defaultValue?: any;
     name: string;
+    id?: string
 };
 
-const DateComponent = React.forwardRef(({children, surveyForm, ...props}: Props) => {
+const DateComponent = React.forwardRef(({id, title, defaultValue, label,...props}: Props) => {
   
   return (
-    <div className="date-input-containter">
-      <label>
-            <h2 className="font-black">
-            {children}
+    <div className="question-body" id={id}>
+      <h2 className="question-title">
+            {title}
             </h2>
-      </label>
+      <label className="question-label">
+        {label}
       <input 
       type="date" 
+      className="question-input"
       {...props} 
-      defaultValue={surveyForm[props.name].split('T')[0]}
       />
+      </label>
+      
     </div>
   );
 });

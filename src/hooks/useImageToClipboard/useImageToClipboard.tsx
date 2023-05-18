@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 
 function useCopyToClipboard() {
-  const [copiedText, setCopiedText] = useState<any>(null)
+  // const [copiedText, setCopiedText] = useState<any>(null)
 
   const copy = async (blob: Blob) => {
         if (!navigator?.clipboard) {
@@ -14,11 +14,11 @@ function useCopyToClipboard() {
           try {
             const data = [new ClipboardItem({ [blob.type]: blob })]
              navigator.clipboard.write(data)
-            setCopiedText(data)
+            // setCopiedText(data)
             return true
           } catch (error) {
             console.warn('Copy failed', error)
-            setCopiedText(null)
+            // setCopiedText(null)
             return false
           }
 
@@ -26,7 +26,7 @@ function useCopyToClipboard() {
 
   }
 
-  return [copiedText, copy]
+  return  copy
 }
 
 export default useCopyToClipboard

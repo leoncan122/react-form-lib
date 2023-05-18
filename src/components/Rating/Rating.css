@@ -1,0 +1,9 @@
+/* grid md:grid-cols-5 gap-7 md:gap-10 lg:gap-20 */
+
+.rating-options-container {
+    display: grid;
+    gap: 3%
+}
+button {
+    padding: 0 0.75rem;
+}

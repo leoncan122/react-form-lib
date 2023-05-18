@@ -3,7 +3,7 @@ import "./InputCheckboxColumns.css"
 import "../../../public/global.css"
 
 interface CheckboxProps {
-    children?: React.ReactNode;
+    title?: React.ReactNode;
     onChange?: React.FormEventHandler<HTMLInputElement>;
     surveyForm: any;
     setSurveyForm: any;
@@ -12,7 +12,7 @@ interface CheckboxProps {
     columns: number;
 };
 
-const InputCheckboxColumns: React.FC<CheckboxProps> = ({ children, surveyForm, setSurveyForm, options, columns = 1, ...props }) => {
+const InputCheckboxColumns: React.FC<CheckboxProps> = ({ title, surveyForm, setSurveyForm, options, columns = 1, ...props }) => {
     let data = [...surveyForm[props.name]];
 
     const sortedOptions: any = options?.sort();
@@ -39,16 +39,16 @@ const InputCheckboxColumns: React.FC<CheckboxProps> = ({ children, surveyForm, s
 
     return (
         <div className="question-body">
-            <h2 className="">
-                {children}
+            <h2 className="question-title">
+                {title}
             </h2>
             {Array.from({ length: columns }, (_, i) => (
-                <div key={i} style={{ flex: 1 }}>
+                <div key={i} style={{ flex: 1 }} className="question-checkbox-container">
                     {sortedOptions.slice(i * columnLength, (i + 1) * columnLength).map((option: string, index: number) => (
-                    <label key={i * index}>
+                    <label key={(i + 1) * index} className="question-label">
                         <input
                             type="checkbox"
-                            className=""
+                            className="question-input"
                             value={option}
                             {...props}
                             onChange={handleEventData}
@@ -56,8 +56,9 @@ const InputCheckboxColumns: React.FC<CheckboxProps> = ({ children, surveyForm, s
                         />
                         {option}
                         {option === 'Other' && (
-                        <label className="">
+                        <label className="question-other-label">
                             <input
+                                className="question-other-input"
                                 type="text"
                                 {...props}
                                 name={`${props.name}Other`}

@@ -2,15 +2,17 @@ import React from 'react';
 import "../../../public/global.css"
 
 interface RadioProps {
+    id: string;
     title?: string;
     name: string;
     options: string[];
     onChange:  (e: React.FormEventHandler<HTMLInputElement>) => void;
     selectedValue?: string;
     columns?: number;
+    maxLimit: number;
 }
 
-const InputNumber: React.FC<RadioProps> = ({ title, onChange, selectedValue, ...props }) => {
+const InputNumber: React.FC<RadioProps> = ({ id,title, onChange, selectedValue,maxLimit, ...props }) => {
     const isNumberKey = (e: any) => {
         const invalidChars = [
           "-",
@@ -24,24 +26,29 @@ const InputNumber: React.FC<RadioProps> = ({ title, onChange, selectedValue, ...
     
     
       return (
-        <div className="px-7 mt-10 ">
-          <h2 className="font-black">
+        <div className="question-body" id={id}>
+          <h2 className="question-title">
           {title}
           </h2>
           <p>Please enter the total number only</p>
-          <label className='flex mt-7 gap-5'>
+          <label className='question-label'>
           <input
-            type="number"
-            // onWheelCapture={(e:  Event) => {
-            //     const filterValue = (e.target as HTMLInputElement).blur;
-            //     filterValue()}}
-            // onKeyUp={(e: React.ChangeEvent<HTMLInputElement>) => {
+            type=""
+            onWheelCapture={(e:  any) => e.blur}
+            // onKeyUp={(e: any) => {
             //     let value = Number((e.target as HTMLInputElement).value);
             //   value > 300 && (value = 300) 
             // }}
+            {...maxLimit && ((e: any) => {
+              const {value} = e.target
+              let finalValue;
+              value > maxLimit ? (finalValue = maxLimit) : (finalValue = value);
+              return Number(finalValue)
+            })
+            }
             // maxLength={3}
             defaultValue={selectedValue || 0 }
-            className="p-4 border-black rounded w-20"
+            className="question-input"
             {...props}
             onKeyDown={isNumberKey}
           />
